@@ -33,14 +33,18 @@ class _TransactionUserState extends State<TransactionUser> {
       value: value,
       date: DateTime.now(),
     );
+    setState(() {
+      _transactions.add(newTransaction);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        TransactionForm(_addTransaction),
         TransactionList(_transactions),
-        TransactionForm(),
+
       ],
     );
   }
