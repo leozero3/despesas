@@ -15,12 +15,12 @@ class Chart extends StatelessWidget {
       );
 
       double totalSum = 0.0;
-      for(var i = 0; i < recentTransactions.length; i++){
+      for (var i = 0; i < recentTransactions.length; i++) {
         bool sameDay = recentTransactions[i].date.day == weekDay.day;
         bool sameMonth = recentTransactions[i].date.day == weekDay.day;
         bool sameYear = recentTransactions[i].date.day == weekDay.day;
 
-        if(sameDay && sameMonth && sameYear) {
+        if (sameDay && sameMonth && sameYear) {
           totalSum += recentTransactions[i].value;
         }
       }
@@ -28,22 +28,37 @@ class Chart extends StatelessWidget {
       print(DateFormat.E().format(weekDay)[0]);
       print(totalSum);
 
-      return {
-        'day': DateFormat.E().format(weekDay)[0],
-        'value': totalSum};
+      return {'day': DateFormat.E().format(weekDay)[0], 'value': totalSum};
+    });
+  }
+
+  double get _weekTotalValue {
+    return groupedTransactions.fold(0, (sum, tr) {
+      return sum + tr['value'];
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 6,
-        margin: EdgeInsets.all(20),
+      elevation: 6,
+      margin: EdgeInsets.all(10),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: groupedTransactions.map((tr) {
-            return ChartBar(label: tr['day'], value: tr['value'], pencentage: 0,);
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                label: tr['day'],
+                value: tr['value'],
+                pencentage: (tr['value'] as double) / _weekTotalValue,
+              ),
+            );
           }).toList(),
         ),
-      );
+      ),
+    );
   }
 }
