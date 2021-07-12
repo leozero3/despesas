@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:despesas/models/transaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +18,12 @@ class TransactionList extends StatelessWidget {
             builder: (ctx, constraints) {
               return Column(
                 children: [
-                  SizedBox(height: constraints.maxHeight * 0.05),
-                  Container(
-                    height: constraints.maxHeight * 0.3,
-                    child: Text(
-                      'Nenhuma Transação',
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Nenhuma Transação',
+                    style: Theme.of(context).textTheme.headline6,
                   ),
-                  SizedBox(height: constraints.maxHeight * 0.05),
+                  SizedBox(height: 20),
                   Container(
                     height: constraints.maxHeight * 0.6,
                     child: Image.asset(
@@ -60,7 +59,15 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                     DateFormat('d MMM y').format(tr.date),
                   ),
-                  trailing: IconButton(
+                  trailing: MediaQuery.of(context).size.width > 400
+                      ? FlatButton.icon(
+                    onPressed: ()=> onRemove(tr.id),
+                    icon: Icon(Icons.delete),
+                    textColor: Theme.of(context).errorColor,
+                    label: Text('excluir'),
+
+                  )
+                  :IconButton(
                     onPressed: () => onRemove(tr.id),
                     icon: Icon(Icons.delete),
                     color: Theme.of(context).errorColor,
