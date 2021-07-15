@@ -18,12 +18,12 @@ class TransactionList extends StatelessWidget {
             builder: (ctx, constraints) {
               return Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     'Nenhuma Transação',
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     height: constraints.maxHeight * 0.6,
                     child: Image.asset(
@@ -62,14 +62,14 @@ class TransactionList extends StatelessWidget {
                   trailing: MediaQuery.of(context).size.width > 400
                       ? FlatButton.icon(
                     onPressed: ()=> onRemove(tr.id),
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     textColor: Theme.of(context).errorColor,
-                    label: Text('excluir'),
+                    label: const Text('excluir'),
 
                   )
                   :IconButton(
                     onPressed: () => onRemove(tr.id),
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     color: Theme.of(context).errorColor,
                   ),
                 ),
