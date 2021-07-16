@@ -1,5 +1,3 @@
-
-
 import 'package:despesas/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,8 +11,6 @@ class TransactionItem extends StatelessWidget {
     @required this.tr,
     @required this.onRemove,
   }) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,19 +36,17 @@ class TransactionItem extends StatelessWidget {
         ),
         trailing: MediaQuery.of(context).size.width > 400
             ? FlatButton.icon(
-          onPressed: ()=> onRemove(tr.id),
-          icon: const Icon(Icons.delete),
-          textColor: Theme.of(context).errorColor,
-          label: const Text('excluir'),
-
-        )
-            :IconButton(
-          onPressed: () => onRemove(tr.id),
-          icon: const Icon(Icons.delete),
-          color: Theme.of(context).errorColor,
-        ),
+                onPressed: () => onRemove(tr.id),
+                icon: const Icon(Icons.delete),
+                textColor: Theme.of(context).errorColor,
+                label: const Text('excluir'),
+              )
+            : IconButton(
+                onPressed: () => onRemove(tr.id),
+                icon: const Icon(Icons.delete),
+                color: Theme.of(context).errorColor,
+              ),
       ),
     );
   }
 }
-
